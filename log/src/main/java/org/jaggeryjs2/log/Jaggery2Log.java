@@ -25,5 +25,51 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 
-public class Log {
+public class Jaggery2Log {
+
+    private static final Log log = LogFactory.getLog(Jaggery2Log.class);
+    private Logger logger;
+
+    public Jaggery2Log Jaggery2Log(String fileName){
+        Jaggery2Log logObj = new Jaggery2Log();
+        Logger currentLogger = Logger.getLogger(fileName);
+        //TODO get LOG LEVEL app context
+        String appLogLevel = "info";
+        if(currentLogger.getLevel() == null){
+            currentLogger.setLevel(Level.toLevel(appLogLevel));
+        }
+        logObj.logger = currentLogger;
+        return logObj;
+    }
+
+    private static void info(String message){
+        log.info(message);
+        return;
+    }
+
+    private static void debug(String message){
+        log.debug(message);
+        return;
+    }
+
+    private static void error(String message){
+        log.error(message);
+        return;
+    }
+
+    private static void fatal(String message){
+        log.fatal(message);
+        return;
+    }
+
+    private static void trace(String message){
+        log.trace(message);
+        return;
+    }
+
+    private static void warn(String message){
+        log.warn(message);
+        return;
+    }
+
 }
