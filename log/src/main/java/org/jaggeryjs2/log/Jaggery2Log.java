@@ -30,45 +30,43 @@ public class Jaggery2Log {
     private static final Log log = LogFactory.getLog(Jaggery2Log.class);
     private Logger logger;
 
-    public Jaggery2Log Jaggery2Log(String fileName){
-        Jaggery2Log logObj = new Jaggery2Log();
+    public Jaggery2Log (String fileName){
         Logger currentLogger = Logger.getLogger(fileName);
         //TODO get LOG LEVEL app context
         String appLogLevel = "info";
         if(currentLogger.getLevel() == null){
             currentLogger.setLevel(Level.toLevel(appLogLevel));
         }
-        logObj.logger = currentLogger;
-        return logObj;
+        logger = currentLogger;
     }
 
-    private static void info(String message){
-        log.info(message);
+    public void info(String message){
+        logger.info(message);
         return;
     }
 
-    private static void debug(String message){
-        log.debug(message);
+    public void debug(String message){
+        logger.debug(message);
         return;
     }
 
-    private static void error(String message){
-        log.error(message);
+    public void error(String message){
+        logger.error(message);
         return;
     }
 
-    private static void fatal(String message){
-        log.fatal(message);
+    public void fatal(String message){
+        logger.fatal(message);
         return;
     }
 
-    private static void trace(String message){
-        log.trace(message);
+    public void trace(String message){
+        logger.trace(message);
         return;
     }
 
-    private static void warn(String message){
-        log.warn(message);
+    public void warn(String message){
+        logger.warn(message);
         return;
     }
 
