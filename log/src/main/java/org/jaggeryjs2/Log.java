@@ -17,20 +17,19 @@
  *
  */
 
-package org.jaggeryjs2.log;
+package org.jaggeryjs2;
 
-import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 
-public class Jaggery2Log {
+public class Log {
 
-    private static final Log log = LogFactory.getLog(Jaggery2Log.class);
+    private static final org.apache.commons.logging.Log log = LogFactory.getLog(Log.class);
     private Logger logger;
 
-    public Jaggery2Log (String fileName){
+    public Log(String fileName){
         Logger currentLogger = Logger.getLogger(fileName);
         //TODO get LOG LEVEL app context
         String appLogLevel = "info";
