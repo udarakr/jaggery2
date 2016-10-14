@@ -1,45 +1,56 @@
 package org.jaggeryjs2;
 
-import jdk.nashorn.internal.runtime.ScriptObject;
+import jdk.nashorn.api.scripting.JSObject;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.wso2.uri.template.URITemplate;
 import org.wso2.uri.template.URITemplateException;
 
+import javax.script.*;
+
 public class URIMatcher {
-    private String uriToBeMatched;
-    private ScriptObject uriParts;
+    private static String uriToBeMatched;
+    private static JSObject uriParts;
+    private static URIMatcher urimatcher;
 
     public URIMatcher(String uri) {
-        URIMatcher uriho = new URIMatcher();
-        uriho.uriToBeMatched = uri;
+        urimatcher = new URIMatcher();
+        urimatcher.uriToBeMatched = uri;
     }
 
     public URIMatcher(){
     }
 
-    public Boolean match(String pattern) {
+    public JSObject match(String pattern) throws ScriptException {
 
         Map<String, String> urlParts = new HashMap<String, String>();
-        boolean uriMatch = false;
         try {
             URITemplate uriTemplate = new URITemplate(pattern);
-            uriMatch = uriTemplate.matches(uriToBeMatched, urlParts);
+            boolean uriMatch = uriTemplate.matches(uriToBeMatched, urlParts);
+            if (!uriMatch) {
+                return null;
+            }
+
         } catch (URITemplateException e) {
 
         }
 
-        ScriptObject nobj = null;
+        ScriptEngineManager m = new ScriptEngineManager();
+        ScriptEngine e = m.getEngineByName("nashorn");
+        JSObject objConstructor = (JSObject)e.eval("Object");
+        JSObject jsObj = (JSObject) objConstructor.newObject();
+
         for (Map.Entry<String, String> entry : urlParts.entrySet()) {
-            nobj.put(entry.getKey(), nobj, true);
+            jsObj.setMember(entry.getKey(), entry.getValue());
+
         }
 
-        this.uriParts = nobj;
-        return uriMatch;
+        this.uriParts = jsObj;
+        return jsObj;
     }
 
-    public ScriptObject jsFunction_elements(){
-        return this.uriParts;
+    public JSObject elements() throws ScriptException, NoSuchMethodException {
+        return uriParts;
     }
 }
