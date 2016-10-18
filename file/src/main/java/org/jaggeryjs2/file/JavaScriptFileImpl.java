@@ -32,14 +32,12 @@ public class JavaScriptFileImpl implements JavaScriptFile {
     }
 
     @SuppressFBWarnings("PATH_TRAVERSAL_IN")
-    @Override
     public void construct() throws Exception{
         f = new java.io.File(path);
     }
 
     @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "PATH_TRAVERSAL_IN", "PATH_TRAVERSAL_IN", "PATH_TRAVERSAL_IN",
             "PATH_TRAVERSAL_IN", "PATH_TRAVERSAL_IN"})
-    @Override
     public void open(String mode) throws Exception {
         if ("r".equals(mode)) {
             try {
@@ -120,7 +118,6 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         opened = true;
     }
 
-    @Override
     public void close() throws Exception {
         if (!opened) {
             return;
@@ -134,7 +131,6 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         }
     }
 
-    @Override
     public String read(long count) throws Exception {
         if (!opened) {
             log.warn("You need to open the file for reading");
@@ -154,7 +150,6 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         }
     }
 
-    @Override
     public void write(String data) throws Exception {
         if (!opened) {
             log.warn("You need to open the file for writing");
@@ -172,7 +167,6 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         }
     }
 
-    @Override
     public void write(InputStream data) throws Exception {
         if (!opened) {
             log.warn("You need to open the file for writing");
@@ -190,7 +184,6 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         }
     }
 
-    @Override
     public String readAll() throws Exception {
         if (!opened) {
             log.warn("You need to open the file for reading");
@@ -212,7 +205,6 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         }
     }
 
-    @Override
     public boolean move(String dest) throws Exception {
         if (opened) {
             log.warn("Please close the file before moving");
@@ -221,7 +213,6 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         return f.renameTo(this.fileManager.getFile(dest));
     }
 
-    @Override
     public boolean del() throws Exception {
         if (opened) {
             log.warn("Please close the file before deleting");
@@ -230,27 +221,22 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         return FileUtils.deleteQuietly(f);
     }
 
-    @Override
     public long getLength() throws Exception {
         return f.length();
     }
 
-    @Override
     public long getLastModified() throws Exception {
         return f.lastModified();
     }
 
-    @Override
     public String getName() throws Exception {
         return f.getName();
     }
 
-    @Override
     public boolean isExist() throws Exception {
         return f.exists();
     }
 
-    @Override
     public InputStream getInputStream() throws Exception {
         try {
             open("r");
@@ -261,7 +247,6 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         }
     }
 
-    @Override
     public OutputStream getOutputStream() throws Exception {
         try {
             open("w");
@@ -272,17 +257,14 @@ public class JavaScriptFileImpl implements JavaScriptFile {
         }
     }
 
-    @Override
     public String getContentType() throws Exception {
         return FileTypeMap.getDefaultFileTypeMap().getContentType(getName());
     }
 
-    @Override
     public boolean saveAs(String dest) throws Exception {
         return move(dest);
     }
 
-    @Override
     public boolean mkdir() throws Exception {
         return f.mkdir();
     }

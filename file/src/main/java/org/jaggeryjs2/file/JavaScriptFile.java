@@ -6,41 +6,41 @@ import java.util.ArrayList;
 
 public interface JavaScriptFile {
 
-    public void construct();
+    public void construct() throws Exception;
 
-    public void open(String mode);
+    public void open(String mode) throws Exception;
 
-    public void close();
+    public void close() throws Exception;
 
-    public String read(long count);
+    public String read(long count) throws Exception;
 
-    public void write(String data);
+    public void write(String data) throws Exception;
 
-    public void write(InputStream data);
+    public void write(InputStream data) throws Exception;
 
-    public String readAll();
+    public String readAll() throws Exception;
 
-    public boolean move(String dest);
+    public boolean move(String dest) throws Exception;
 
-    public boolean del();
+    public boolean del() throws Exception;
 
-    public long getLength();
+    public long getLength() throws Exception;
 
-    public long getLastModified();
+    public long getLastModified() throws Exception;
 
-    public String getName();
+    public String getName() throws Exception;
 
-    public boolean isExist();
+    public boolean isExist() throws Exception;
 
-    public InputStream getInputStream();
+    public InputStream getInputStream() throws Exception;
 
-    public OutputStream getOutputStream();
+    public OutputStream getOutputStream() throws Exception;
 
-    public String getContentType();
+    public String getContentType() throws Exception;
 
-    public boolean saveAs(String dest);
+    public boolean saveAs(String dest) throws Exception;
 
-    public boolean mkdir();
+    public boolean mkdir() throws Exception;
 
     public boolean isDirectory();
 

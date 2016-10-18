@@ -24,7 +24,7 @@ public class File {
 
     private JavaScriptFile file;
     private JavaScriptFileManagerImpl manager;
-    private static File fileObj;
+    private File fileObj;
 
     private static boolean mimeMapLoaded = false;
     private static final String RESOURCE_MEDIA_TYPE_MAPPINGS_FILE = "mime.types";
@@ -40,11 +40,11 @@ public class File {
         fileObj.file.construct();
     }
 
-    public static void open(String mode){
+    public void open(String mode) throws Exception {
         fileObj.file.open(mode);
     }
 
-    public static void write(Object obj) {
+    public void write(Object obj) throws Exception {
         if (obj instanceof InputStream) {
             fileObj.file.write((InputStream) obj);
         } else if (obj instanceof Stream) {
@@ -55,47 +55,47 @@ public class File {
         }
     }
 
-    public static String read(int numberOfCharacters) {
+    public  String read(int numberOfCharacters) throws Exception {
         return fileObj.file.read(numberOfCharacters);
     }
 
-    public static String readAll() {
+    public  String readAll() throws Exception {
         return fileObj.file.readAll();
     }
 
-    public static void close() {
+    public void close() throws Exception {
         fileObj.file.close();
     }
 
-    public static boolean move(String target) throws Exception {
+    public boolean move(String target) throws Exception {
         return fileObj.file.move(fileObj.manager.getJavaScriptFile(target).getURI());
     }
 
-    public static boolean saveAs(String target) throws Exception {
+    public boolean saveAs(String target) throws Exception {
         return fileObj.file.saveAs(fileObj.manager.getJavaScriptFile(target).getURI());
     }
 
-    public static boolean del() {
+    public boolean del() throws Exception {
         return fileObj.file.del();
     }
 
-    public static long getLength() {
+    public long getLength() throws Exception {
         return fileObj.file.getLength();
     }
 
-    public static long getLastModified() {
+    public long getLastModified() throws Exception {
         return fileObj.file.getLastModified();
     }
 
-    public static String getName() {
+    public String getName() throws Exception {
         return fileObj.file.getName();
     }
 
-    public static boolean isExists() {
+    public boolean isExists() throws Exception {
         return fileObj.file.isExist();
     }
 
-    public static String getContentType() throws Exception{
+    public String getContentType() throws Exception{
 
 
         if (!mimeMapLoaded) {
@@ -108,15 +108,15 @@ public class File {
 
     //TODO implement getStream method
 
-    public static boolean isDirectory() {
+    public boolean isDirectory() {
         return fileObj.file.isDirectory();
     }
 
-    public static String getPath() {
+    public String getPath() {
         return fileObj.file.getURI();
     }
 
-    public static boolean mkdir() {
+    public boolean mkdir() throws Exception {
         return fileObj.file.mkdir();
     }
 
@@ -129,7 +129,7 @@ public class File {
      * @throws Exception
      */
     @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "PATH_TRAVERSAL_OUT", "PATH_TRAVERSAL_IN"})
-    public static boolean zip(String dest) throws IOException {
+    public boolean zip(String dest) throws Exception {
 
         ZipOutputStream zip = null;
 
@@ -178,7 +178,7 @@ public class File {
      * @throws Exception
      */
     @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "PATH_TRAVERSAL_IN", "PATH_TRAVERSAL_IN"})
-    public static boolean jsFunction_unZip(String dest) throws IOException {
+    public boolean jsFunction_unZip(String dest) throws Exception {
 
         ZipInputStream zin = null;
         BufferedOutputStream out = null;
