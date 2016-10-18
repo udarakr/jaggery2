@@ -14,7 +14,7 @@ if(uriMatcher.match('/{dir0}/{page}')) {
 
 //XHR test snippet
  var XMLHttpRequest = Java.type('org.jaggeryjs2.xhr.XMLHttpRequest');
- var url = 'http://jaggeryjs.org/documentation.jag';
+ var url = 'http://jaggeryjs.org/documentation.jag?api=Log';
  var xhr = new XMLHttpRequest();
  xhr.open("GET", url);
  xhr.setRequestHeader("user" , "udarar");

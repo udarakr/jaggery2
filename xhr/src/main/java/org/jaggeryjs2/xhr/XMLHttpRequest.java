@@ -74,9 +74,9 @@ public class XMLHttpRequest {
     /**
      * XHR properties
      */
-    private static short readyState;
-    private static StatusLine statusLine;
-    private static String responseText;
+    private short readyState;
+    private StatusLine statusLine;
+    private String responseText;
     private AbstractJSObject onreadystatechange;
 
     private HttpMethodBase method = null;
@@ -119,21 +119,20 @@ public class XMLHttpRequest {
     }
 
     public int status() {
-        return this.statusLine.getStatusCode();
+        return xhr.statusLine.getStatusCode();
     }
 
     public short readyState()  {
-        return this.readyState;
+        return xhr.readyState;
     }
 
     public String statusText() {
-        return this.statusLine.getReasonPhrase();
+        return xhr.statusLine.getReasonPhrase();
     }
 
     public String responseText() {
-        if (this.readyState == LOADING || this.readyState == DONE) {
-
-            return this.responseText;
+        if (xhr.readyState == LOADING || xhr.readyState == DONE) {
+            return xhr.responseText;
         } else {
             return "";
         }
@@ -399,6 +398,7 @@ public class XMLHttpRequest {
     }
 
     private static void executeRequest(XMLHttpRequest xhr)  {
+        System.out.println("XHR httpclient " + xhr.httpClient);
         try {
             xhr.httpClient.executeMethod(xhr.method);
             xhr.statusLine = xhr.method.getStatusLine();
