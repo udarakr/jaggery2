@@ -74,9 +74,9 @@ public class XMLHttpRequest {
     /**
      * XHR properties
      */
-    private short readyState;
-    private StatusLine statusLine;
-    private String responseText;
+    private static short readyState;
+    private static StatusLine statusLine;
+    private static String responseText;
     private AbstractJSObject onreadystatechange;
 
     private HttpMethodBase method = null;
@@ -111,7 +111,7 @@ public class XMLHttpRequest {
     }
 
     private XMLHttpRequest(HttpClient httpClient){
-
+        this.httpClient = httpClient;
     }
 
     public void init(){
@@ -132,6 +132,7 @@ public class XMLHttpRequest {
 
     public String responseText() {
         if (this.readyState == LOADING || this.readyState == DONE) {
+
             return this.responseText;
         } else {
             return "";
