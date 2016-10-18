@@ -52,7 +52,7 @@ public class XMLHttpRequest {
 
     private final int HTTPS_DEFAULT_PORT = 443;
     private HttpClient httpClient = null;
-    private static XMLHttpRequest xhr;
+    private XMLHttpRequest xhr;
     private static final String HEADER_JOINER = ", ";
 
     private String methodName = null;
@@ -106,7 +106,15 @@ public class XMLHttpRequest {
             log.error(e);
         }
 
-        xhr = new XMLHttpRequest();
+        xhr = new XMLHttpRequest(httpClient);
+
+    }
+
+    private XMLHttpRequest(HttpClient httpClient){
+
+    }
+
+    public void init(){
 
     }
 
@@ -132,14 +140,14 @@ public class XMLHttpRequest {
 
     //TODO implement responseXML method
 
-    public static void open(String method, String url){
+    public void open(String method, String url){
         setMethod( xhr, method);
         setURL(xhr, url);
 
         updateReadyState(xhr, OPENED);
     }
 
-    public static void open(String method, String url, String async){
+    public void open(String method, String url, String async){
         setMethod( xhr, method);
         setURL(xhr, url);
         setAsync(xhr, async);
@@ -147,7 +155,7 @@ public class XMLHttpRequest {
         updateReadyState(xhr, OPENED);
     }
 
-    public static void open(String method, String url, String userName, String password){
+    public void open(String method, String url, String userName, String password){
         setMethod( xhr, method);
         setURL(xhr, url);
         setUsername(xhr, userName);
@@ -156,7 +164,7 @@ public class XMLHttpRequest {
         updateReadyState(xhr, OPENED);
     }
 
-    public static void open(String method, String url, String async, String userName, String password){
+    public void open(String method, String url, String async, String userName, String password){
         setMethod( xhr, method);
         setURL(xhr, url);
         setAsync(xhr, async);
@@ -166,25 +174,25 @@ public class XMLHttpRequest {
         updateReadyState(xhr, OPENED);
     }
 
-    public static void setRequestHeader(String name, String value){
+    public void setRequestHeader(String name, String value){
         xhr.requestHeaders.add(new Header(name, value));
     }
 
-    public static void send() throws Exception {
+    public void send() throws Exception {
         xhr.sendRequest(null);
     }
 
-    public static void send(String request) throws Exception {
+    public void send(String request) throws Exception {
         xhr.sendRequest(request);
     }
 
-    public static void abort(){
+    public void abort(){
         if (xhr.async) {
             xhr.method.abort();
         }
     }
 
-    public static String getResponseHeader(String header) {
+    public String getResponseHeader(String header) {
         if (xhr.readyState == UNSENT || xhr.readyState == OPENED) {
             return null;
         }
@@ -207,7 +215,7 @@ public class XMLHttpRequest {
         return value != null ? value.toString() : null;
     }
 
-    public static String getAllResponseHeaders(){
+    public String getAllResponseHeaders(){
         if (xhr.readyState == UNSENT || xhr.readyState == OPENED) {
             return null;
         }
