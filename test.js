@@ -13,7 +13,7 @@ if(uriMatcher.match('/{dir0}/{page}')) {
 }*/
 
 //XHR test snippet
- var XMLHttpRequest = Java.type('org.jaggeryjs2.xhr.XMLHttpRequest');
+/* var XMLHttpRequest = Java.type('org.jaggeryjs2.xhr.XMLHttpRequest');
  var url = 'http://jaggeryjs.org/documentation.jag?api=Log';
  var xhr = new XMLHttpRequest();
  xhr.open("GET", url);
@@ -22,5 +22,17 @@ xhr.send();
 
  print("ReadyState : "+xhr.readyState());
  print("<br>ResponseStatus : "+xhr.status());
- print("<br>ResponseText : "+xhr.responseText());
+ print("<br>ResponseText : "+xhr.responseText());*/
+
+
+ //File test snippet
+ var File = Java.type('org.jaggeryjs2.file.File');
+ var path = "foo.txt";
+ var file = new File(path);
+ file.open("r");
+ var message = "";
+
+ message = file.readAll();
+ print(message);
+ file.close();
 
