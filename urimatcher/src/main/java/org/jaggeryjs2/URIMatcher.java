@@ -10,9 +10,10 @@ import org.wso2.uri.template.URITemplateException;
 import javax.script.*;
 
 public class URIMatcher {
-    private static String uriToBeMatched;
-    private static JSObject uriParts;
-    private static URIMatcher urimatcher;
+
+    private String uriToBeMatched;
+    private JSObject uriParts;
+    private URIMatcher urimatcher;
 
     public URIMatcher(String uri) {
         urimatcher = new URIMatcher();
@@ -27,7 +28,7 @@ public class URIMatcher {
         Map<String, String> urlParts = new HashMap<String, String>();
         try {
             URITemplate uriTemplate = new URITemplate(pattern);
-            boolean uriMatch = uriTemplate.matches(uriToBeMatched, urlParts);
+            boolean uriMatch = uriTemplate.matches(urimatcher.uriToBeMatched, urlParts);
             if (!uriMatch) {
                 return null;
             }
@@ -46,11 +47,11 @@ public class URIMatcher {
 
         }
 
-        this.uriParts = jsObj;
+        urimatcher.uriParts = jsObj;
         return jsObj;
     }
 
     public JSObject elements() throws ScriptException, NoSuchMethodException {
-        return uriParts;
+        return urimatcher.uriParts;
     }
 }
