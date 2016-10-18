@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 public class Log {
 
     private static final org.apache.commons.logging.Log log = LogFactory.getLog(Log.class);
-    private Logger logger;
+    private final Logger logger;
 
     public Log(String fileName){
         Logger currentLogger = Logger.getLogger(fileName);
@@ -36,37 +36,31 @@ public class Log {
         if(currentLogger.getLevel() == null){
             currentLogger.setLevel(Level.toLevel(appLogLevel));
         }
-        logger = currentLogger;
+        this.logger = currentLogger;
     }
 
     public void info(String message){
         logger.info(message);
-        return;
     }
 
     public void debug(String message){
         logger.debug(message);
-        return;
     }
 
     public void error(String message){
         logger.error(message);
-        return;
     }
 
     public void fatal(String message){
         logger.fatal(message);
-        return;
     }
 
     public void trace(String message){
         logger.trace(message);
-        return;
     }
 
     public void warn(String message){
         logger.warn(message);
-        return;
     }
 
 }
