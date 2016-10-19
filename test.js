@@ -26,7 +26,7 @@ xhr.send();
 
 
  //File test snippet
- var File = Java.type('org.jaggeryjs2.file.File');
+/* var File = Java.type('org.jaggeryjs2.file.File');
  var path = "foo.txt";
  var file = new File(path);
  file.open("r");
@@ -34,5 +34,11 @@ xhr.send();
 
  message = file.readAll();
  print(message);
- file.close();
+ file.close();*/
+
+ var url  = "https://api.twitter.com/1/statuses/user_timeline.json";
+ var data = { include_entities:true,include_rts:true,screen_name:"wso2",count:1 };
+ var twitterJson = get(url, data ,"json");
+ print(twitterJson);
+
 
